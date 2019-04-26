@@ -1,20 +1,19 @@
 package cloud.fogbow.vlanid.core.xmpp;
 
 import cloud.fogbow.vlanid.core.ApplicationFacade;
-import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
 import org.jamppa.component.handler.AbstractQueryHandler;
 import org.xmpp.packet.IQ;
 
-public class ReleaseVlanIdRequestHandler extends AbstractQueryHandler {
-    private static final Logger LOGGER = Logger.getLogger(ReleaseVlanIdRequestHandler.class);
+public class RemoteReleaseVlanIdRequestHandler extends AbstractQueryHandler {
+    private static final Logger LOGGER = Logger.getLogger(RemoteReleaseVlanIdRequestHandler.class);
 
     private static final String QUERY = "query";
     private static final String RELEASE_VLAN_ID = "releaseVlanId";
     private static final String VLAN_ID = "vlanId";
 
-    public ReleaseVlanIdRequestHandler() {
+    public RemoteReleaseVlanIdRequestHandler() {
         super(RELEASE_VLAN_ID);
     }
 
