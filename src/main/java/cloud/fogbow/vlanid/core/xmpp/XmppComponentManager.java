@@ -10,6 +10,6 @@ public class XmppComponentManager extends XMPPComponent {
         super(jid, password, xmppServerIp, xmppServerPort, timeout);
 
         addSetHandler(new ReleaseVlanIdRequestHandler());
-        addGetHandler(new GetFreeVlanIdRequestHandler());
+        addGetHandler(new RemoteAcquireVlanIdRequestHandler());
     }
 }

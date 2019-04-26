@@ -7,16 +7,16 @@ import org.dom4j.Element;
 import org.jamppa.component.handler.AbstractQueryHandler;
 import org.xmpp.packet.IQ;
 
-public class GetFreeVlanIdRequestHandler extends AbstractQueryHandler {
-    private static final Logger LOGGER = Logger.getLogger(GetFreeVlanIdRequestHandler.class);
+public class RemoteAcquireVlanIdRequestHandler extends AbstractQueryHandler {
+    private static final Logger LOGGER = Logger.getLogger(RemoteAcquireVlanIdRequestHandler.class);
 
     private static final String QUERY = "query";
-    private static final String GET_FREE_VLAN_ID = "getFreeVlanId";
+    private static final String ACQUIRE_VLAN_ID = "acquireVlanId";
     private static final String AVAILABLE_VLAN_ID = "availableVlanId";
     private static final String AVAILABLE_VLAN_ID_CLASS_NAME = "availableVlanIdClassName";
 
-    public GetFreeVlanIdRequestHandler() {
-        super(GET_FREE_VLAN_ID);
+    public RemoteAcquireVlanIdRequestHandler() {
+        super(ACQUIRE_VLAN_ID);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class GetFreeVlanIdRequestHandler extends AbstractQueryHandler {
     }
 
     private void updateResponse(IQ response, Integer vlanId) {
-        Element queryEl = response.getElement().addElement(QUERY, GET_FREE_VLAN_ID);
+        Element queryEl = response.getElement().addElement(QUERY, ACQUIRE_VLAN_ID);
         Element availableVlanIdElement = queryEl.addElement(AVAILABLE_VLAN_ID);
 
         Element availableVlanIdClassNameElement = queryEl.addElement(AVAILABLE_VLAN_ID_CLASS_NAME);
