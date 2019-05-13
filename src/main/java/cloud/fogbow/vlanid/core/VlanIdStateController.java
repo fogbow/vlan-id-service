@@ -29,7 +29,7 @@ public class VlanIdStateController {
             vlanIdStateHolder.getVlanIdStates().get(vlanId).setAvailable(true);
             boolean deleted = vlanIdStateHolder.getAvailableVlanIds().add(vlanId);
         } else {
-            throw new InvalidParameterException(Messages.Error.VLAN_ID_NOT_ALLOCATED + vlanId);
+            throw new InvalidParameterException(String.format(Messages.Error.VLAN_ID_NOT_ALLOCATED, vlanId));
         }
     }
 }

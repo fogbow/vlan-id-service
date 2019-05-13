@@ -10,14 +10,12 @@ import cloud.fogbow.vlanid.core.VlanIdStateController;
 import cloud.fogbow.vlanid.core.datastore.DatabaseManager;
 import cloud.fogbow.vlanid.core.datastore.VlanIdStateRecoveryService;
 import cloud.fogbow.vlanid.core.model.VlanIdState;
-import cloud.fogbow.vlanid.core.xmpp.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,20 +38,6 @@ public class Main implements ApplicationRunner {
             VlanIdStateController vlanIdStateController = new VlanIdStateController();
             this.applicationFacade.setVlanIdStateController(vlanIdStateController);
 
-            // Starting PacketSender
-            while (true) {
-                try {
-                    PacketSenderHolder.init();
-                    break;
-                } catch (IllegalStateException e1) {
-                    LOGGER.error(Messages.Error.NO_PACKET_SENDER, e1);
-                    try {
-                        TimeUnit.SECONDS.sleep(10);
-                    } catch (InterruptedException e2) {
-                        e2.printStackTrace();
-                    }
-                }
-            }
             String vlanIdsRange = PropertiesHolder.getInstance().getProperty(ConfigurationPropertyDefaults.VLAN_IDS);
             initializeVlanIdDatabase(vlanIdsRange);
         } catch (FatalErrorException|UnexpectedException e) {

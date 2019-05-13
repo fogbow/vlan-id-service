@@ -16,7 +16,7 @@ public class ApplicationFacade {
         return instance;
     }
 
-    public int getFreeVlanId() throws UnexpectedException, NoAvailableResourcesException {
+    public int getVlanId() throws UnexpectedException, NoAvailableResourcesException {
         return this.vlanIdStateController.getFreeVlanId();
     }
 
