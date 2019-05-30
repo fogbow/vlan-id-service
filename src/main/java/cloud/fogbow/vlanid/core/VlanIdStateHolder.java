@@ -20,7 +20,6 @@ public class VlanIdStateHolder {
         // retrieve from database
         DatabaseManager databaseManager = DatabaseManager.getInstance();
         this.vlanIdStates = databaseManager.retrieveVlanIdStates();
-        this.vlanIdStates.put(255, new VlanIdState(255));
         this.initializeVlanStates();
     }
 
