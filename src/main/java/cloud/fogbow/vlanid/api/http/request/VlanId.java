@@ -1,5 +1,6 @@
 package cloud.fogbow.vlanid.api.http.request;
 
+import cloud.fogbow.common.exceptions.InvalidParameterException;
 import cloud.fogbow.common.exceptions.NoAvailableResourcesException;
 import cloud.fogbow.common.exceptions.UnexpectedException;
 import cloud.fogbow.vlanid.constants.Messages;
@@ -32,8 +33,10 @@ public class VlanId {
             int vlanId = ApplicationFacade.getInstance().getVlanId();
             cloud.fogbow.vlanid.api.http.response.VlanId vlanIdResponse = new cloud.fogbow.vlanid.api.http.response.VlanId(vlanId);
             return new ResponseEntity<>(vlanIdResponse, HttpStatus.OK);
+        } catch (NoAvailableResourcesException e) {
+            return new ResponseEntity<>(new cloud.fogbow.vlanid.api.http.response.VlanId(), HttpStatus.NOT_ACCEPTABLE);
         } catch (Exception e) {
-            LOGGER.info(String.format( cloud.fogbow.common.constants.Messages.Exception.OPERATION_RETURNED_ERROR_S, e.getMessage()), e);
+            LOGGER.info(String.format(cloud.fogbow.common.constants.Messages.Exception.OPERATION_RETURNED_ERROR_S, e.getMessage()), e);
             throw e;
         }
     }
@@ -49,6 +52,8 @@ public class VlanId {
             LOGGER.info(String.format(Messages.Info.RECEIVING_RELEASE_VLAN_ID_REQUEST, vlanId));
             ApplicationFacade.getInstance().releaseVlanId(vlanId.getVlanId());
             return new ResponseEntity<>(new cloud.fogbow.vlanid.api.http.response.VlanId(vlanId.getVlanId()), HttpStatus.OK);
+        } catch (InvalidParameterException e) {
+            return new ResponseEntity<>(new cloud.fogbow.vlanid.api.http.response.VlanId(vlanId.getVlanId()), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             LOGGER.info(String.format(Messages.Exception.GENERIC_EXCEPTION, e.getMessage()));
             throw e;
