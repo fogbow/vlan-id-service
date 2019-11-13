@@ -7,4 +7,4 @@ fi
 
 image_tag=$1
 
-sudo docker push fogbow/resource-allocation-service:$image_tag
+sudo docker push fogbow/vlan-id-service:$image_tag
